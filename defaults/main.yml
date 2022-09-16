@@ -1,0 +1,3 @@
+---
+docker_script_url: curl -fsSL https://get.docker.com -o get-docker.sh
+docker_script_dest: /home/ubuntu/

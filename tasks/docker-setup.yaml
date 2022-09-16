@@ -1,0 +1,24 @@
+- name: Update Packages
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+- name: Install Basic Packages
+  apt:
+    name: ['wget', 'curl', 'git', 'unzip']
+    state: present
+    update_cache: yes
+- name: Download Docker Installation Script
+  shell:
+    cmd: "{{ docker_script_url }}"
+    chdir: "{{ docker_script_dest }}"
+- name: Install Docker
+  shell:
+    cmd: sh /home/ubuntu/get-docker.sh
+  notify: start docker
+- name: Create docker group
+  group:
+    name: docker
+- name: Add user to Docker Group
+  shell:
+    cmd: usermod -aG docker ubuntu
